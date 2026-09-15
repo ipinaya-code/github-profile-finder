@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitHub Profile Analytics</title>
+  
+  <!-- CSS Maestro Modular -->
+  <link rel="stylesheet" href="/frontend/css/main.css">
+  
+  <!-- Chart.js para gráficos -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <main class="container">
+    <header style="text-align: center; margin-bottom: 1.5rem;">
+      <h1 style="color: var(--accent-color);">GitHub Profile Analytics</h1>
+      <p style="color: var(--text-muted); font-size: 0.9rem;">FastAPI + ES6 Modules</p>
+    </header>
+
+    <section class="search-box">
+      <input type="text" id="username-input" class="search-input" placeholder="Escribe un usuario de GitHub..." />
+      <button id="search-btn" class="search-btn">Buscar</button>
+    </section>
+
+    <div id="status-message" class="status-box hidden"></div>
+
+    <div id="dashboard" class="hidden" style="margin-top: 1.5rem;">
+      <article class="card">
+        <div style="display:flex; gap: 1rem; align-items:center; margin-bottom: 1rem;">
+          <img id="avatar" src="" alt="Avatar" style="width: 80px; height: 80px; border-radius: 50%; border: 2px solid var(--accent-color);" />
+          <div>
+            <h2 id="name"></h2>
+            <a id="username" href="#" target="_blank" style="color: var(--accent-color);"></a>
+            <p id="bio" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;"></p>
+          </div>
+        </div>
+
+        <div class="stats-grid">
+          <div><span>Repos</span><strong id="repos" style="display:block;">0</strong></div>
+          <div><span>Seguidores</span><strong id="followers" style="display:block;">0</strong></div>
+          <div><span>Siguiendo</span><strong id="following" style="display:block;">0</strong></div>
+        </div>
+      </article>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
+        <article class="card">
+          <h3 style="color: var(--accent-color); margin-bottom: 1rem;">Lenguajes más usados</h3>
+          <canvas id="languagesChart"></canvas>
+        </article>
+
+        <article class="card">
+          <h3 style="color: var(--accent-color); margin-bottom: 1rem;">Top Repositorios</h3>
+          <ul id="repos-list" style="list-style: none;"></ul>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <!-- Módulo Principal JavaScript -->
+  <script type="module" src="/frontend/js/main.js"></script>
+</body>
+</html>

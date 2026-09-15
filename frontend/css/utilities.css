@@ -1,0 +1,19 @@
+.hidden {
+  display: none !important;
+}
+
+.status-box {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
+
+.status-box.error {
+  color: var(--error-color);
+}
+
+.status-box.loading {
+  color: var(--accent-color);
+}
