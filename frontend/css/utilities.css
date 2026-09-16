@@ -1,55 +1,19 @@
-/* ==========================================================
-   ESTILOS RESPONSIVE (MÓVILES Y TABLETS)
-   ========================================================== */
-
-/* Layout por defecto (Escritorio) */
-.grid-two-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-top: 1rem;
+.hidden {
+  display: none !important;
 }
 
-/* Ajustes para pantallas pequeñas (Celulares) */
-@media (max-width: 768px) {
-    /* El contenedor principal aprovecha la pantalla */
-    .container {
-        padding: 0.75rem;
-    }
+.status-box {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+}
 
-    /* Pasa el grid de 2 columnas a 1 sola columna en vertical */
-    .grid-two-cols {
-        grid-template-columns: 1fr;
-    }
+.status-box.error {
+  color: var(--error-color);
+}
 
-    /* La caja de búsqueda y el botón se apilan limpiamente */
-    .search-box {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    .search-input {
-        width: 100%;
-    }
-
-    .search-btn {
-        width: 100%;
-    }
-
-    /* Alineación del perfil de usuario y avatar */
-    .card > div:first-child {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    #avatar {
-        margin: 0 auto;
-    }
-
-    /* Previene que el gráfico de Chart.js rompa el ancho máximo */
-    canvas {
-        max-width: 100% !important;
-        height: auto !important;
-    }
+.status-box.loading {
+  color: var(--accent-color);
 }
