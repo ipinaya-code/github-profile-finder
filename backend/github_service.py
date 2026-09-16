@@ -1,4 +1,5 @@
 from collections import Counter
+import os
 
 import httpx
 
@@ -10,21 +11,35 @@ async def get_github_profile(username: str) -> dict:
 	headers = {
 		"Accept": "application/vnd.github+json",
 		"X-GitHub-Api-Version": "2022-11-28",
-		"User-Agent": "github-profile-finder",
+		"User-Agent": "github-profile-finder-app",
 	}
 
-	async with httpx.AsyncClient(timeout=10.0) as client:
+	# Si agregas GITHUB_TOKEN en Render (Environment Variables), se usa automáticamente
+	github_token = os.getenv("GITHUB_TOKEN")
+	if github_token:
+		headers["Authorization"] = f"Bearer {github_token}"
+
+	async with httpx.AsyncClient(timeout=15.0) as client:
+		# 1. Obtener datos del perfil
 		profile_response = await client.get(f"{GITHUB_API_URL}/users/{username}", headers=headers)
 
 		if profile_response.status_code == 404:
 			raise ValueError("El usuario de GitHub no existe.")
+		elif profile_response.status_code == 403:
+			raise ValueError("Se excedió el límite de peticiones a GitHub. Intenta de nuevo más tarde.")
+		
 		profile_response.raise_for_status()
 
+		# 2. Obtener repositorios del usuario
 		repos_response = await client.get(
 			f"{GITHUB_API_URL}/users/{username}/repos",
 			params={"per_page": 100, "sort": "updated"},
 			headers=headers,
 		)
+		
+		if repos_response.status_code == 403:
+			raise ValueError("Se excedió el límite de peticiones a GitHub. Intenta de nuevo más tarde.")
+			
 		repos_response.raise_for_status()
 
 	profile_data = profile_response.json()
