@@ -1,4 +1,5 @@
-const API_BASE_URL = 'https://github-profile-finder-y64z.onrender.com/api/user';
+// Si en FastAPI la ruta es /users/{username}:
+const API_BASE_URL = 'https://github-profile-finder-y64z.onrender.com/users';
 
 export async function fetchUserData(username) {
   try {
