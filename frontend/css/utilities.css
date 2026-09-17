@@ -1,19 +1,59 @@
+/* Utilidad de Visibilidad */
 .hidden {
   display: none !important;
 }
 
+/* Cajas de Estado (Loading y Error) con relieve 3D */
 .status-box {
   text-align: center;
-  padding: 1.5rem;
-  border-radius: 0.75rem;
-  background-color: var(--card-bg);
+  padding: 2rem 1.5rem;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #111827, #0f172a);
   border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-3d-card);
+  transition: all 0.3s ease;
+  animation: slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Estado de Error con brillo Neón */
 .status-box.error {
   color: var(--error-color);
+  border-color: rgba(248, 113, 113, 0.4);
+  box-shadow: 0 10px 25px -5px rgba(248, 113, 113, 0.2), var(--shadow-3d-card);
 }
 
+/* Estado de Carga con Animación */
 .status-box.loading {
   color: var(--accent-color);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: 0 10px 25px -5px var(--accent-glow), var(--shadow-3d-card);
+  animation: pulseGlow 1.5s infinite alternate, slideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Animaciones de Entrada Suave */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulseGlow {
+  from {
+    border-color: rgba(56, 189, 248, 0.3);
+    box-shadow: 0 0 10px rgba(56, 189, 248, 0.1);
+  }
+  to {
+    border-color: rgba(56, 189, 248, 0.8);
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+  }
+}
+
+/* Clase de animación aplicable a cualquier tarjeta al renderizar */
+.animate-appear {
+  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
