@@ -1,72 +1,69 @@
-# GitHub Profile Finder
+# 🚀 GitHub Profile Analytics 3D
 
-Aplicacion web para buscar perfiles de GitHub y consultar sus estadisticas publicas, lenguajes mas usados y repositorios destacados.
+Una aplicación web full-stack, modular y totalmente responsive con estética **3D Neón**, diseñada para buscar perfiles de GitHub, analizar estadísticas públicas de usuarios, calcular la distribución de lenguajes de programación en tiempo real y listar repositorios destacados.
 
-## Tecnologias
+---
 
-- Frontend: HTML, CSS y JavaScript ES Modules.
-- Backend: Python, FastAPI y HTTPX.
-- Datos: API publica de GitHub.
-- Graficos: Chart.js.
+## 🌐 Enlaces de Despliegue
 
-## Requisitos
+- **Frontend (GitHub Pages):** [https://ipinaya-code.github.io/github-profile-finder/frontend/](https://ipinaya-code.github.io/github-profile-finder/frontend/)
+- **Backend API (Render):** `https://github-profile-finder-y54z.onrender.com/api/user/{username}`
 
-- Python 3.10 o superior.
-- Conexion a internet para consultar GitHub.
+---
 
-## Instalacion
+## ✨ Características Principales
 
-Desde la carpeta `backend`, instala las dependencias:
+- **Diseño Neón 3D Adaptativo:** Interfaz construida con capas de profundidad (`box-shadow`), efectos de iluminación neón (`linear-gradient`) y animaciones fluidas (`.animate-appear`).
+- **100% Mobile-First & Responsive:** Adaptación automática para pantallas móviles, tablets y monitores mediante CSS Grid y Flexbox sin deformar componentes.
+- **Gráficos Interactivos (Chart.js):** Gráfico tipo dona (*doughnut*) con paleta neón brillante, bordes adaptados al fondo y destrucción de instancias previas para evitar superposiciones de canvas.
+- **Backend Optimizado con FastAPI:** Consumo asíncrono de la API pública de GitHub mediante HTTPX con cálculo de lenguajes de programación.
+- **Autenticación mediante Token (`GITHUB_TOKEN`):** Extensión del límite de tasa de la API de GitHub de **60 a 5,000 peticiones por hora**.
+- **Manejo Robusto de Errores y Carga:** Interfaz interactiva con estados de carga (*loading*), deshabilitación temporal de botones durante peticiones y banners de error estilizados.
 
-```powershell
-cd backend
-python -m pip install -r requirements.txt
-```
+---
 
-## Ejecucion en la terminal
+## 🛠️ Tecnologías Utilizadas
 
-Inicia el backend desde la carpeta `backend`:
-de ahi en la terminal debes poner ----------> uvicorn main:app --reload --port 8000
+### **Backend**
+- **Lenguaje:** Python 3.10+
+- **Framework:** FastAPI
+- **Servidor ASGI:** Uvicorn
+- **Cliente HTTP:** HTTPX / Requests
 
-```powershell
-uvicorn main:app --reload --port 8000
-```
+### **Frontend**
+- **Estructura:** HTML5 Semántico
+- **Estilos:** CSS3 Modular (Variables CSS, Flexbox, CSS Grid)
+- **Lógica:** JavaScript ES6 (Módulos nativos `import` / `export`)
+- **Librería de Gráficos:** Chart.js v4 (CDN)
 
-Abre la aplicacion en:
+### **Infraestructura & CI/CD**
+- **Hosting Frontend:** GitHub Pages
+- **Hosting Backend:** Render (Web Service Python)
+- **Control de Versiones:** Git / GitHub
 
-```text
-http://127.0.0.1:8000/
-```
+---
 
-FastAPI sirve el frontend y la API desde el mismo puerto. No es necesario iniciar un segundo servidor para la carpeta `frontend`.
-
-## Endpoints
-
-- `GET /`: interfaz web.
-- `GET /health`: comprobacion del estado del backend.
-- `GET /api/user/{username}`: perfil, lenguajes y repositorios destacados de un usuario.
-
-## Variables de entorno
-
-El proyecto funciona sin variables de entorno porque usa la API publica de GitHub. Si mas adelante se configura un token, debe guardarse en `.env` y nunca publicarse:
-
-```env
-GITHUB_TOKEN=tu_token_de_github
-```
-
-## Estructura
+## 📁 Estructura del Proyecto
 
 ```text
-backend/
-	github_service.py  # Consulta y transforma los datos de GitHub
-	main.py            # API FastAPI y servidor del frontend
-	requirements.txt   # Dependencias Python
-frontend/
-	index.html         # Interfaz principal
-	css/               # Estilos
-	js/                # Logica, API y graficos
-```
-
-## Limitaciones
-
-La API publica de GitHub tiene limites de consultas. Para un uso frecuente o una aplicacion desplegada conviene configurar autenticacion mediante un token.
+github-profile-finder/
+│
+├── backend/
+│   ├── github_service.py     # Lógica de consulta a la API de GitHub y agregación de lenguajes
+│   ├── main.py               # Servidor FastAPI, manejo de CORS, endpoints y archivos estáticos
+│   └── requirements.txt      # Dependencias de Python (fastapi, uvicorn, httpx, python-dotenv)
+│
+├── frontend/
+│   ├── index.html            # Estructura principal y contenedores del Dashboard
+│   ├── css/
+│   │   ├── base.css          # Reset global, variables de color neón y tipografía
+│   │   ├── components.css    # Estilos de tarjetas 3D, botones, inputs y rejilla
+│   │   ├── utilities.css     # Clases utilitarias y animaciones (.animate-appear, .hidden)
+│   │   └── main.css         # Archivo maestro de importación CSS
+│   └── js/
+│       ├── api.js            # Comunicación con el backend FastAPI y manejo de timeouts
+│       ├── chart.js          # Configuración y renderizado del gráfico Chart.js
+│       ├── ui.js             # Manipulación del DOM, inyección de datos y animaciones
+│       └── main.js           # Orquestador principal de eventos del DOM
+│
+└── README.md                 # Documentación técnica del proyecto
