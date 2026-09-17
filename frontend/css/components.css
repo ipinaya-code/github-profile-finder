@@ -1,15 +1,26 @@
+/* Contenedor Principal */
 .container {
   max-width: 56rem;
   margin: 0 auto;
+  perspective: 1000px; /* Activa la perspectiva 3D */
 }
 
+/* Caja de Búsqueda 3D */
 .search-box {
   display: flex;
   gap: 0.75rem;
   background-color: var(--card-bg);
-  padding: 0.5rem;
-  border-radius: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 1rem;
   border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-3d-card);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.search-box:focus-within {
+  border-color: var(--accent-color);
+  box-shadow: 0 0 20px var(--accent-glow), var(--shadow-3d-card);
+  transform: translateY(-2px);
 }
 
 .search-input {
@@ -19,31 +30,107 @@
   outline: none;
   color: var(--text-main);
   padding: 0.5rem 1rem;
+  font-size: 1rem;
 }
 
+/* Botón con Efecto Elevación 3D */
 .search-btn {
-  background-color: var(--accent-color);
+  background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
   color: #0b0f19;
   border: none;
-  padding: 0.5rem 1.5rem;
-  border-radius: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 0.75rem;
   font-weight: bold;
   cursor: pointer;
+  box-shadow: var(--shadow-3d-btn);
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
+.search-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
+}
+
+.search-btn:active {
+  transform: translateY(1px) scale(0.98);
+}
+
+/* Tarjetas 3D con Relieve y Neón al pasar el cursor */
 .card {
-  background-color: var(--card-bg);
+  background: linear-gradient(145deg, #111827, #0f172a);
   padding: 1.5rem;
-  border-radius: 0.75rem;
+  border-radius: 1.25rem;
   border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-3d-card);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
+.card:hover {
+  transform: translateY(-5px) rotateX(1deg);
+  border-color: rgba(56, 189, 248, 0.4);
+  box-shadow: var(--shadow-3d-hover);
+}
+
+/* Grilla de Estadísticas */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1rem;
-  background-color: rgba(15, 23, 42, 0.6);
-  padding: 1rem;
-  border-radius: 0.5rem;
+  background: rgba(15, 23, 42, 0.8);
+  padding: 1.25rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
   text-align: center;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.grid-two-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Ajustes Responsive para Celulares y Tablets */
+@media (max-width: 768px) {
+  body {
+    padding: 0.75rem;
+  }
+
+  .grid-two-cols {
+    grid-template-columns: 1fr;
+  }
+
+  .search-box {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .search-btn {
+    width: 100%;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+    padding: 0.75rem;
+  }
+
+  .card > div:first-child {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  #avatar {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
 }
